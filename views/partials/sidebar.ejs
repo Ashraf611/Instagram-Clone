@@ -1,0 +1,30 @@
+
+
+<div class="sidebar d-flex flex-column">
+    <h3 style="font-family: fantasy;margin-bottom: 40px;">Instagram</h3>
+    <div class="profile">
+        <img src="/uploads/<%=user.profilePicture %>" alt="Profile">
+        <div>
+            <h6 class="m-0"><%= user.fullName %></h6>
+            <small>@<%=user.username%></small>
+        </div>
+    </div>
+
+
+    <a href="/home" class="nav-link"><i class="fas fa-home"></i> Home</a>
+    <a href="/home/search" class="nav-link"><i class="fas fa-search"></i> Search</a>
+    <a href="#" class="nav-link"><i class="bi bi-heart-fill"></i> Notifications</a>
+    <a href="/messages" class="nav-link"><i class="bi bi-chat-dots-fill"></i> Messages</a>
+    <a href="/home/ai" class="nav-link"><i class="bi bi-discord"></i> AI Chat</a>
+    <a href="/home/addpost" class="nav-link"><i class="bi bi-plus-circle-fill"></i> Create</a>
+    <a href="/home/profile" class="nav-link"><i class="fas fa-user"></i> Profile</a>
+    <a href="#" class="nav-link"><i class="fas fa-cog"></i> Settings</a>
+
+
+    <form action="/logout" method="post">
+        <button type="submit" class="nav-link logout">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+    </form>
+    
+</div>

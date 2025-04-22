@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    
+    <style>
+        body {
+    background-color: #f8f9fa;
+    margin-left: 250px; 
+}
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: white;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000; 
+    overflow-y: auto; 
+}
+
+.sidebar .profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.sidebar .profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+}
+
+.sidebar .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    color: #333;
+    padding: 10px;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #f0f0f0;
+}
+
+.sidebar .logout {
+    margin-top: auto;
+    color: red;
+}
+
+.content {
+    margin-left: 250px; 
+    padding: 20px;
+    min-height: 100vh;
+}
+
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: white;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.content {
+    margin-left: 250px; 
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.profile-picture {
+    text-align: center;
+}
+
+.profile-picture img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 3px solid #ddd;
+}
+
+.profile-info h3 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.profile-info p {
+    font-size: 16px;
+    color: #666;
+}
+
+.followers-info {
+    margin-top: 10px;
+    display: flex;
+    gap: 20px;
+}
+
+.followers-info span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.nav-tabs .nav-item .nav-link {
+    font-size: 16px;
+}
+
+.tab-content {
+    margin-top: 20px;
+}
+
+
+
+    .post {
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 100%; 
+    background: #f0f0f0; 
+    border-radius: 10px; 
+}
+
+.post img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    border-radius: 10px; 
+}
+
+
+.post:hover{
+    transform: scale(1.01);
+}
+
+
+@media (max-width: 768px) {
+    .col-md-3 {
+        width: 50%; 
+    }
+}
+
+@media (max-width: 576px) {
+    .col-md-3 {
+        width: 100%; 
+    }
+}
+
+
+
+@media (max-width: 768px) {
+    .content {
+        margin-left: 0; 
+    }
+
+    .profile-picture img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .profile-info h3 {
+        font-size: 24px;
+    }
+
+    .followers-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.allcontent{
+    margin-left: -10px;
+}
+
+    </style>
+</head>
+<body>
+
+    
+    <%- include('partials/sidebar') %>
+
+    
+    <div class="allcontent content ms-250">
+        <div class="container mt-5">
+            
+            <div class="row">
+                <div class="col-md-4">
+                    
+                    <div class="profile-picture">
+                        <img src="/uploads/<%=user.profilePicture %>" alt="Profile Picture" class="img-fluid rounded-circle">
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    
+                    <div class="profile-info">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3><%= user.fullName %></h3>
+                            <a href="/home/edit" class="btn btn-outline-secondary">Edit Profile</a>
+                        </div>
+                        <p>@<%= user.username %></p>
+                        <div class="followers-info">
+                            <span><strong><%= user.followers.length %></strong> Followers</span>
+                            <span><strong><%= user.following.length %></strong> Following</span>
+                        </div>
+                    </div>
+                    <p style="margin-top: 20px;"><%= user.bio %></p>
+                </div>
+            </div>
+
+            
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#posts">Posts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#saved">Saved</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content mt-3">
+                        <div id="posts" class="tab-pane fade show active">
+                            <div class="row">
+                                
+                                
+                                <%posts.forEach(post => {%>
+                                    <div class="col-md-3 col-sm-6 col-12">
+                                        <div class="post">
+                                            <a href="/home/post/<%=post._id %>">
+                                            <img src="/uploads/<%=post.imageUrl %>" alt="Post 1" class="img-fluid rounded">
+                                            </a>
+                                        </div>
+                                    </div>
+                                <%}); %>
+                            </div>
+                        </div>
+                        <div id="saved" class="tab-pane fade">
+                            <p>Your saved posts will appear here.</p>
+                            <%user.savedPosts.forEach(post => {%>
+                                <div class="col-md-3 col-sm-6 col-12">
+                                    <div class="post">
+                                        <a href="/home/post/<%=post._id %>">
+                                        <img src="/uploads/<%=post.imageUrl %>" alt="Post 1" class="img-fluid rounded">
+                                        </a>
+                                    </div>
+                                </div>
+                            <%}); %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

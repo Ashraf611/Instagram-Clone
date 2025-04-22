@@ -1,0 +1,58 @@
+body {
+    background-color: #f8f9fa;
+    margin-left: 250px; /* Offset body content to the right of the sidebar */
+}
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: white;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Ensure the sidebar stays above other content */
+    overflow-y: auto; /* Allows scrolling if sidebar content exceeds the viewport height */
+}
+
+.sidebar .profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.sidebar .profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+}
+
+.sidebar .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    color: #333;
+    padding: 10px;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #f0f0f0;
+}
+
+.sidebar .logout {
+    margin-top: auto;
+    color: red;
+}
+
+.content {
+    margin-left: 250px; /* Ensure content doesn't overlap with the sidebar */
+    padding: 20px;
+    min-height: 100vh;
+}
+

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .post-container {
+            display: flex;
+            max-width: 1000px;
+            width: 90%;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .left-section {
+            width: 80px;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            border-right: 1px solid #ddd;
+        }
+        .left-section i {
+            font-size: 28px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .left-section i:hover {
+            color: red;
+        }
+        .stats {
+            font-size: 14px;
+            color: #666;
+        }
+        .post-image {
+            flex: 1;
+            max-height: 700px;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        .right-section {
+            width: 350px;
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+        }
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .post-header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        .post-header a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+        .post-caption {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        
+        .comments {
+            margin-top: 15px;
+            flex-grow: 1;
+            overflow-y: auto;
+            max-height: 250px;
+        }
+        .comment {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+        .comment img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+        
+        .comment-form {
+            display: flex;
+            margin-top: 300px;
+        }
+        .comment-form input {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .comment-form button {
+            margin-left: 5px;
+        }
+        .back{
+            margin-left: 100px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="post-container">
+
+    
+    <img src="/uploads/<%= post.imageUrl %>" class="post-image" alt="Post Image">
+
+    
+    <div class="right-section">
+        
+        <div class="post-header">
+            <img src="/uploads/<%= post.user.profilePicture %>" alt="User">
+            <h3 href="/profile/<%= post.user._id %>"><%= post.user.username %></h3>
+            <a href="/home" class="back"><i class="bi bi-arrow-up-square-fill"></i></a>
+        </div>
+
+        
+        <div class="post-caption">
+            <strong><%= post.user.username %></strong> <%= post.caption %>
+        </div>
+
+        
+        <p class="text-muted" style="font-size: 12px;">
+            <%= new Date(post.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) %> ||
+            <%= post.likes.length %> Likes
+            <%= post.comments.length %> Comments
+        </p>
+
+
+
+        
+        <div class="comments" style="margin-top: 15px;">
+            <% post.comments.forEach(comment => { %>
+                <div class="comment">
+                    <img src="/uploads/<%= comment.user.profilePicture %>" alt="User">
+                    <strong><%= comment.user.username %></strong>: <%= comment.text %>
+                </div>
+            <% }); %>
+        </div>
+
+        
+        <form class="comment-form" action="/home/post-comment/<%= post._id %>/comment" method="POST">
+            <input type="text" name="comment" placeholder="Add a comment..." required>
+            <button type="submit" class="btn btn-primary btn-sm">Post</button>
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>
