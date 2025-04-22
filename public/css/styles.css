@@ -1,6 +1,6 @@
 body {
     background-color: #f8f9fa;
-    margin-left: 250px; /* Offset body content to the right of the sidebar */
+    margin-left: 250px; 
 }
 
 .sidebar {
@@ -12,8 +12,8 @@ body {
     background: white;
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    z-index: 1000; /* Ensure the sidebar stays above other content */
-    overflow-y: auto; /* Allows scrolling if sidebar content exceeds the viewport height */
+    z-index: 1000; 
+    overflow-y: auto; 
 }
 
 .sidebar .profile {
@@ -51,7 +51,7 @@ body {
 }
 
 .content {
-    margin-left: 250px; /* Ensure content doesn't overlap with the sidebar */
+    margin-left: 250px; 
     padding: 20px;
     min-height: 100vh;
 }
